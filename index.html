@@ -64,6 +64,42 @@
                 <div class="main-text lower-text">4</div>
                 <div class="shift-text">$</div>
              </div>
+             <div class="key" key="5">
+                <div class="main-text lower-text">5</div>
+                <div class="shift-text">%</div>
+             </div>
+             <div class="key" key="6">
+                <div class="main-text lower-text">6</div>
+                <div class="shift-text">^</div>
+             </div>
+             <div class="key" key="7">
+                <div class="main-text lower-text">7</div>
+                <div class="shift-text">&</div>
+             </div>
+             <div class="key" key="8">
+                <div class="main-text lower-text">8</div>
+                <div class="shift-text">*</div>
+             </div>
+             <div class="key" key="9">
+                <div class="main-text lower-text">9</div>
+                <div class="shift-text">(</div>
+             </div>
+             <div class="key" key="0">
+                <div class="main-text lower-text">0</div>
+                <div class="shift-text">)</div>
+             </div>
+             <div class="key" key="½">
+                <div class="main-text lower-text">-</div>
+                <div class="shift-text">_</div>
+             </div>
+             <div class="key" key="»">
+                <div class="main-text lower-text">=</div>
+                <div class="shift-text">+</div>
+             </div>
+             
+             <div class="key key-special" key="" style="width:128px;">
+                <div class="main-text">BACKSPACE</div>
+             </div>
            </div>
            <div class="key-row">
             <div class="key key-special" key="	" style="width:128px;">
@@ -87,6 +123,43 @@
                 <div class="shift-text">R</div>
                 <div class="command-text"><img src="actions/edit-redo.svg"/></div>
              </div>
+             <div class="key" key="T">
+                <div class="main-text lower-text">t</div>
+                <div class="shift-text">T</div>
+             </div>
+             <div class="key" key="Y">
+                <div class="main-text lower-text">y</div>
+                <div class="shift-text">Y</div>
+             </div>
+             <div class="key" key="U">
+                <div class="main-text lower-text">u</div>
+                <div class="shift-text">U</div>
+             </div>
+             <div class="key" key="I">
+                <div class="main-text lower-text">i</div>
+                <div class="shift-text">I</div>
+             </div>
+             <div class="key" key="O">
+                <div class="main-text lower-text">o</div>
+                <div class="shift-text">O</div>
+             </div>
+             <div class="key" key="P">
+                <div class="main-text lower-text">p</div>
+                <div class="shift-text">P</div>
+             </div>
+             <div class="key" key="Û">
+                <div class="main-text lower-text">[</div>
+                <div class="shift-text">{</div>
+             </div>
+             <div class="key" key="Ý">
+                <div class="main-text lower-text">]</div>
+                <div class="shift-text">}</div>
+             </div>
+             <div class="key" key="Ü">
+                <div class="main-text lower-text">\</div>
+                <div class="shift-text">|</div>
+             </div>
+             
            </div>
            <div class="key-row">
             <div class="key key-special" key="caps-lock" style="width:160px;">
@@ -100,6 +173,7 @@
              <div class="key" key="S">
                 <div class="main-text lower-text">s</div>
                 <div class="shift-text">S</div>
+                <div class="command-text"><img src="actions/document-save.svg"/></div>
              </div>
              <div class="key" key="D">
                 <div class="main-text lower-text">d</div>
@@ -109,6 +183,30 @@
                 <div class="main-text lower-text">f</div>
                 <div class="shift-text">F</div>
                 <div class="command-text"><img src="actions/search.svg"/></div>
+             </div>
+             <div class="key" key="G">
+                <div class="main-text lower-text">g</div>
+                <div class="shift-text">G</div>
+             </div>
+             <div class="key" key="H">
+                <div class="main-text lower-text">h</div>
+                <div class="shift-text">H</div>
+             </div>
+             <div class="key" key="J">
+                <div class="main-text lower-text">j</div>
+                <div class="shift-text">J</div>
+             </div>
+             <div class="key" key="K">
+                <div class="main-text lower-text">k</div>
+                <div class="shift-text">K</div>
+             </div>
+             <div class="key" key="L">
+                <div class="main-text lower-text">l</div>
+                <div class="shift-text">L</div>
+             </div>
+             <div class="key" key="º">
+                <div class="main-text lower-text">;</div>
+                <div class="shift-text">:</div>
              </div>
            </div>
            <div class="key-row">
@@ -164,6 +262,9 @@
             line-height: 24px;
             font-family: 'IBM Plex Sans', sans-serif;
 
+        }
+        .key-row{
+            min-width:1920px;
         }
 
         .window {
@@ -286,6 +387,7 @@
         var keyboardEl=document.querySelector(".keyboard");
         var shiftHeld=false;
         var commandHeld=false;
+        var metaHeld=false;
         var capsLock=false;
         function updateKeyboard(){
             if(shiftHeld || capsLock){
@@ -301,7 +403,7 @@
                 var el=document.querySelector(`.key[key="caps-lock"]`);
             if(el)el.classList.remove("pressed");
             }
-            if(commandHeld){
+            if(commandHeld||metaHeld){
                 keyboardEl.classList.add("command-held");
             }else{
                 keyboardEl.classList.remove("command-held");
@@ -309,7 +411,8 @@
         }
         window.addEventListener("keydown", function(keyEvent) {
             shiftHeld=keyEvent.shiftKey;
-            commandHeld=keyEvent.ctrlKey||keyEvent.metaKey;
+            commandHeld=keyEvent.ctrlKey;
+            metaHeld=keyEvent.metaKey;
             // if(keyEvent.)
             var k=String.fromCharCode(keyEvent.which);
             console.log(k,keyEvent.which);
@@ -320,7 +423,8 @@
         
         window.addEventListener("keyup", function(keyEvent) {
             shiftHeld=keyEvent.shiftKey;
-            commandHeld=keyEvent.ctrlKey||keyEvent.metaKey;
+            commandHeld=keyEvent.ctrlKey;
+            metaHeld=keyEvent.metaKey;
             var k=String.fromCharCode(keyEvent.which);
             console.log(k,keyEvent.which);
             if(keyEvent.which===20){
@@ -330,6 +434,19 @@
             if(el)el.classList.remove("pressed");
             updateKeyboard();
         })
+        // window.addEventListener("keypress", function(keyEvent) {
+        //     shiftHeld=keyEvent.shiftKey;
+        //     commandHeld=keyEvent.ctrlKey;
+        //     metaHeld=keyEvent.metaKey;
+        //     var k=String.fromCharCode(keyEvent.which);
+        //     console.log(k,keyEvent.which);
+        //     if(keyEvent.which===20){
+        //         capsLock=!capsLock;
+        //     }
+        //     var el=document.querySelector(`.key[key="${k}"]`);
+        //     if(el)el.classList.remove("pressed");
+        //     updateKeyboard();
+        // })
     </script>
 </body>
 
