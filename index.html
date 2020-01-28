@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Capsule Keyboard</title>
+    <link href="https://fonts.googleapis.com/css?family=Zilla+Slab&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="world">
+        <div class="keyboard">
+            <div class="keyboard-main">
+           <div class="key-row">
+            <div class="key key-special" key="">
+               <div class="main-text">ESC</div>
+            </div>
+            <div class="key key-special" key="p">
+                <div class="main-text">F1</div>
+             </div>
+             <div class="key key-special">
+                <div class="main-text">F2</div>
+             </div>
+             <div class="key key-special">
+                <div class="main-text">F3</div>
+             </div>
+             <div class="key key-special">
+                <div class="main-text">F4</div>
+             </div>
+             <div class="key key-special">
+                <div class="main-text">F5</div>
+             </div>
+             <div class="key key-special">
+                <div class="main-text">F6</div>
+             </div>
+             <div class="key key-special">
+                <div class="main-text">F7</div>
+             </div>
+             <div class="key key-special">
+                <div class="main-text">F8</div>
+             </div>
+           </div>
+           <div class="key-row">
+            <div class="key" key="À">
+               <div class="main-text lower-text">`</div>
+               <div class="shift-text">~</div>
+            </div>
+            <div class="key" key="1">
+                <div class="main-text lower-text">1</div>
+                <div class="shift-text">!</div>
+             </div>
+             <div class="key" key="2">
+                <div class="main-text lower-text">2</div>
+                <div class="shift-text">@</div>
+             </div>
+             <div class="key" key="3">
+                <div class="main-text lower-text">3</div>
+                <div class="shift-text">#</div>
+             </div>
+             <div class="key" key="4">
+                <div class="main-text lower-text">4</div>
+                <div class="shift-text">$</div>
+             </div>
+           </div>
+           <div class="key-row">
+            <div class="key key-special" key="	" style="width:128px;">
+               <div class="main-text">TAB</div>
+            </div>
+            <div class="key" key="Q">
+                <div class="main-text lower-text">q</div>
+                <div class="shift-text">Q</div>
+                <div class="command-text"><img src="actions/exit.svg"/></div>
+             </div>
+             <div class="key" key="W">
+                <div class="main-text lower-text">w</div>
+                <div class="shift-text">W</div>
+             </div>
+             <div class="key" key="E">
+                <div class="main-text lower-text">e</div>
+                <div class="shift-text">E</div>
+             </div>
+             <div class="key" key="R">
+                <div class="main-text lower-text">r</div>
+                <div class="shift-text">R</div>
+                <div class="command-text"><img src="actions/edit-redo.svg"/></div>
+             </div>
+           </div>
+           <div class="key-row">
+            <div class="key key-special" key="caps-lock" style="width:160px;">
+               <div class="main-text">CAPS LOCK</div>
+            </div>
+            <div class="key" key="A">
+                <div class="main-text lower-text">a</div>
+                <div class="shift-text">A</div>
+                <div class="command-text"><img src="actions/edit-select-all.svg"/></div>
+             </div>
+             <div class="key" key="S">
+                <div class="main-text lower-text">s</div>
+                <div class="shift-text">S</div>
+             </div>
+             <div class="key" key="D">
+                <div class="main-text lower-text">d</div>
+                <div class="shift-text">D</div>
+             </div>
+             <div class="key" key="F">
+                <div class="main-text lower-text">f</div>
+                <div class="shift-text">F</div>
+                <div class="command-text"><img src="actions/search.svg"/></div>
+             </div>
+           </div>
+           <div class="key-row">
+            <div class="key key-special" key="" style="width:200px;">
+               <div class="main-text">SHIFT</div>
+            </div>
+            <div class="key" key="Z">
+                <div class="main-text lower-text">z</div>
+                <div class="shift-text">Z</div>
+                <div class="command-text"><img src="actions/edit-undo.svg"/></div>
+             </div>
+             <div class="key" key="X">
+                <div class="main-text lower-text">x</div>
+                <div class="shift-text">X</div>
+                <div class="command-text"><img src="actions/edit-cut.svg"/></div>
+             </div>
+             <div class="key" key="C">
+                <div class="main-text lower-text">c</div>
+                <div class="shift-text">C</div>
+                <div class="command-text"><img src="actions/edit-copy.svg"/></div>
+             </div>
+             <div class="key" key="V">
+                <div class="main-text lower-text">v</div>
+                <div class="shift-text">V</div>
+                <div class="command-text"><img src="actions/edit-paste.svg"/></div>
+                <!-- <div class="command-alt-text"><img src="actions/edit-paste-in-place.svg"/></div> -->
+             </div>
+           </div>
+            </div>
+            <div class="keyboard-right">
+           
+            </div>
+        </div>
+      
+    </div>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        #world {
+            background: url(wall_bottom.jpg);
+            background-size: cover;
+            width: 100%;
+            height: 100%;
+            color: white;
+            padding: 0px;
+            font-size: 18px;
+            line-height: 24px;
+            font-family: 'IBM Plex Sans', sans-serif;
+
+        }
+
+        .window {
+            /* backdrop-filter: blur(10px) brightness(50%); */
+            background: rgba(0, 0, 0, 0.5);
+            padding: 2px;
+            margin: 2px;
+
+        }
+
+
+        .key {
+            text-align: center;
+            backdrop-filter: blur(15px) ;
+            background: rgba(0,0,0, 0.25);
+            /* padding: 8px; */
+            margin: 8px;
+            box-sizing: border-box;
+            height: 80px;
+            /* padding-left: 10px;
+            padding-right: 10px; */
+            display: inline-block;
+            transition: box-shadow 0.25s;
+            vertical-align: top;
+            width:80px;
+            border-radius: 12px;
+            position: relative;
+            font-size: 24px;
+            line-height: 32px;
+        }
+        .key.pressed {
+            backdrop-filter: blur(15px) ;
+            background: rgba(255,255,255, 0.25);
+            
+        }
+        .key.key-special{
+            font-size: 18px;
+            line-height: 24px;
+        }
+        .key .main-text{
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform: translate(-50%,-50%);
+            transition: all 0.2s;
+        }
+        .key .shift-text{
+            position:absolute;
+            top:25%;
+            left:25%;
+            transform: translate(-50%,-50%);
+            font-size: 18px;
+            line-height: 24px;
+            transition: all 0.2s;
+        }
+        .key .command-text{
+            position:absolute;
+            top:75%;
+            left:25%;
+            transform: translate(-50%,-50%);
+            font-size: 18px;
+            line-height: 24px;
+            transition: all 0.2s;
+        }
+        
+
+        
+        .keyboard.shift-held .key .shift-text{
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform: translate(-50%,-50%);
+            font-size: 24px;
+            line-height: 32px;
+            transition: all 0.2s;
+        }
+        .keyboard.shift-held .key .lower-text{
+            position:absolute;
+            top:75%;
+            left:75%;
+            transform: translate(-50%,-50%);
+            font-size: 18px;
+            line-height: 24px;
+            transition: all 0.2s;
+        }
+
+
+
+        .keyboard.command-held .key .command-text{
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform: translate(-50%,-50%);
+            font-size: 24px;
+            line-height: 32px;
+            transition: all 0.2s;
+        }
+        .keyboard.command-held .key .shift-text{
+            position:absolute;
+            top:25%;
+            left:75%;
+            transform: translate(-50%,-50%);
+            font-size: 18px;
+            line-height: 24px;
+            transition: all 0.2s;
+        }
+        .keyboard.command-held .key .lower-text{
+            position:absolute;
+            top:75%;
+            left:75%;
+            transform: translate(-50%,-50%);
+            font-size: 18px;
+            line-height: 24px;
+            transition: all 0.2s;
+        }
+
+    </style>
+    
+    <script>
+        var keyboardEl=document.querySelector(".keyboard");
+        var shiftHeld=false;
+        var commandHeld=false;
+        var capsLock=false;
+        function updateKeyboard(){
+            if(shiftHeld || capsLock){
+                keyboardEl.classList.add("shift-held");
+            }else{
+                keyboardEl.classList.remove("shift-held");
+                
+            }
+            if(capsLock){
+                var el=document.querySelector(`.key[key="caps-lock"]`);
+            if(el)el.classList.add("pressed");
+            }else{
+                var el=document.querySelector(`.key[key="caps-lock"]`);
+            if(el)el.classList.remove("pressed");
+            }
+            if(commandHeld){
+                keyboardEl.classList.add("command-held");
+            }else{
+                keyboardEl.classList.remove("command-held");
+            }
+        }
+        window.addEventListener("keydown", function(keyEvent) {
+            shiftHeld=keyEvent.shiftKey;
+            commandHeld=keyEvent.ctrlKey||keyEvent.metaKey;
+            // if(keyEvent.)
+            var k=String.fromCharCode(keyEvent.which);
+            console.log(k,keyEvent.which);
+            var el=document.querySelector(`.key[key="${k}"]`);
+            if(el)el.classList.add("pressed");
+            updateKeyboard();
+        })
+        
+        window.addEventListener("keyup", function(keyEvent) {
+            shiftHeld=keyEvent.shiftKey;
+            commandHeld=keyEvent.ctrlKey||keyEvent.metaKey;
+            var k=String.fromCharCode(keyEvent.which);
+            console.log(k,keyEvent.which);
+            if(keyEvent.which===20){
+                capsLock=!capsLock;
+            }
+            var el=document.querySelector(`.key[key="${k}"]`);
+            if(el)el.classList.remove("pressed");
+            updateKeyboard();
+        })
+    </script>
+</body>
+
+</html>
