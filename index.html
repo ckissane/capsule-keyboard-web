@@ -208,6 +208,13 @@
                 <div class="main-text lower-text">;</div>
                 <div class="shift-text">:</div>
              </div>
+             <div class="key" key="Þ">
+                <div class="main-text lower-text">'</div>
+                <div class="shift-text">"</div>
+             </div>
+             <div class="key key-special" key="enter" style="width:144px;">
+                <div class="main-text">ENTER</div>
+             </div>
            </div>
            <div class="key-row">
             <div class="key key-special" key="" style="width:200px;">
@@ -233,6 +240,29 @@
                 <div class="shift-text">V</div>
                 <div class="command-text"><img src="actions/edit-paste.svg"/></div>
                 <!-- <div class="command-alt-text"><img src="actions/edit-paste-in-place.svg"/></div> -->
+             </div>
+           </div>
+           <div class="key-row">
+            <div class="key key-special" key="" style="width:128px;">
+               <div class="main-text">CONTROL</div>
+            </div>
+            <div class="key key-special" key="" style="width:128px;">
+                <div class="main-text">ALT</div>
+             </div>
+             <div class="key key-special" key="[" style="width:128px;">
+                <div class="main-text"><img src="actions/draw-cuboid.svg"/></div>
+             </div>
+             <div class="key" key=" " style="width:512px;">
+               
+             </div>
+             <div class="key key-special" key="[" style="width:128px;">
+                <div class="main-text"><img src="actions/draw-cuboid.svg"/></div>
+             </div>
+             <div class="key key-special" key="" style="width:128px;">
+                <div class="main-text">FN</div>
+             </div>
+             <div class="key key-special" key="" style="width:128px;">
+                <div class="main-text">CONTROL</div>
              </div>
            </div>
             </div>
@@ -265,6 +295,7 @@
         }
         .key-row{
             min-width:1920px;
+            font-size:0px;
         }
 
         .window {
@@ -365,7 +396,7 @@
         .keyboard.command-held .key .shift-text{
             position:absolute;
             top:25%;
-            left:75%;
+            left:25%;
             transform: translate(-50%,-50%);
             font-size: 18px;
             line-height: 24px;
@@ -412,26 +443,25 @@
         window.addEventListener("keydown", function(keyEvent) {
             shiftHeld=keyEvent.shiftKey;
             commandHeld=keyEvent.ctrlKey;
-            metaHeld=keyEvent.metaKey;
+            
             // if(keyEvent.)
             var k=String.fromCharCode(keyEvent.which);
+            metaHeld=(k=="[")||metaHeld;
             console.log(k,keyEvent.which);
-            var el=document.querySelector(`.key[key="${k}"]`);
-            if(el)el.classList.add("pressed");
+            document.querySelectorAll(`.key[key="${k.replace(String.fromCharCode(13),"enter")}"]`).forEach((el)=>el.classList.add("pressed"));
             updateKeyboard();
         })
         
         window.addEventListener("keyup", function(keyEvent) {
             shiftHeld=keyEvent.shiftKey;
-            commandHeld=keyEvent.ctrlKey;
-            metaHeld=keyEvent.metaKey;
+            commandHeld=keyEvent.ctrlKey&& (!(k==="["));
             var k=String.fromCharCode(keyEvent.which);
+            metaHeld=!(k==="[")&&metaHeld;
             console.log(k,keyEvent.which);
             if(keyEvent.which===20){
                 capsLock=!capsLock;
             }
-            var el=document.querySelector(`.key[key="${k}"]`);
-            if(el)el.classList.remove("pressed");
+            document.querySelectorAll(`.key[key="${k.replace(String.fromCharCode(13),"enter")}"]`).forEach((el)=>el.classList.remove("pressed"));
             updateKeyboard();
         })
         // window.addEventListener("keypress", function(keyEvent) {
