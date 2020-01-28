@@ -321,28 +321,31 @@
             background-size: cover;
             width: 100vw;
             height: 100vh;
-            overflow:auto;
+            /* overflow: auto; */
             color: white;
             padding: 0px;
             font-size: 18px;
             line-height: 24px;
             font-family: 'IBM Plex Sans', sans-serif;
-            text-align: center;
+            text-align: left;
 
         }
 
         .key-row {
-            width: calc( 1376px + 16px );
+            width: calc(1376px + 16px);
             font-size: 0px;
-            text-align:left;
+            text-align: left;
         }
-.keyboard-main{
-    width: calc( 1376px + 16px );
-}
-.keyboard{
-    display: inline-block;
-    width: calc( 1376px + 16px );
-}
+
+        .keyboard-main {
+            width: calc(1376px + 16px);
+        }
+
+        .keyboard {
+            display: inline-block;
+            width: calc(1376px + 16px);
+        }
+
         .window {
             /* backdrop-filter: blur(10px) brightness(50%); */
             background: rgba(0, 0, 0, 0.5);
@@ -464,8 +467,9 @@
             line-height: 24px;
             transition: all 0.2s;
         }
-        .key *{
-            pointer-events:none;
+
+        .key * {
+            pointer-events: none;
         }
     </style>
 
@@ -496,6 +500,7 @@
                 keyboardEl.classList.remove("command-held");
             }
         }
+
         function keyDown(keyEvent) {
             // shiftHeld = keyEvent.shiftKey;
             // commandHeld = keyEvent.ctrlKey;
@@ -505,65 +510,74 @@
             metaHeld = (k === "[") || metaHeld;
             commandHeld = (k === "") || commandHeld;
             shiftHeld = (k === "") || shiftHeld;
-            
+
             console.log(k, keyEvent.which);
             document.querySelectorAll(`.key[key="${k.replace(String.fromCharCode(13),"enter")}"]`).forEach((
                 el) => el.classList.add("pressed"));
             updateKeyboard();
         }
         window.addEventListener("keydown", keyDown)
-        document.querySelectorAll(".key").forEach(el=>{
-el.addEventListener("touchstart",(e)=> {
-    var vou=e.target.getAttribute("key");
-    if(vou){
-    if(vou==="enter"){
-        vou=13;
-       
-    }else{
-        vou=vou.charCodeAt(0);
-    }
-    keyDown({which:vou})
-    }
-    });
-    el.addEventListener("mousedown",(e)=> {
-    var vou=e.target.getAttribute("key");
-    if(vou){
-    if(vou==="enter"){
-        vou=13;
-       
-    }else{
-        vou=vou.charCodeAt(0);
-    }
-    keyDown({which:vou})
-    }
-    });
+        document.querySelectorAll(".key").forEach(el => {
+            el.addEventListener("touchstart", (e) => {
+                var vou = e.target.getAttribute("key");
+                if (vou) {
+                    if (vou === "enter") {
+                        vou = 13;
+
+                    } else {
+                        vou = vou.charCodeAt(0);
+                    }
+                    keyDown({
+                        which: vou
+                    })
+                }
+            });
+            el.addEventListener("mousedown", (e) => {
+                var vou = e.target.getAttribute("key");
+                if (vou) {
+                    if (vou === "enter") {
+                        vou = 13;
+
+                    } else {
+                        vou = vou.charCodeAt(0);
+                    }
+                    keyDown({
+                        which: vou
+                    })
+                }
+            });
 
 
-    el.addEventListener("touchend",(e)=> {
-    var vou=e.target.getAttribute("key");
-    if(vou){
-    if(vou==="enter"){
-        vou=13;
-       
-    }else{
-        vou=vou.charCodeAt(0);
-    }
-    keyUp({which:vou})
-    }
-    });
-    el.addEventListener("mouseup",(e)=> {
-    var vou=e.target.getAttribute("key");
-    if(vou){
-    if(vou==="enter"){
-        vou=13;
-       
-    }else{
-        vou=vou.charCodeAt(0);
-    }
-    keyUp({which:vou})
-    }
-    });
+            el.addEventListener("touchend", (e) => {
+                var vou = e.target.getAttribute("key");
+                if (vou) {
+                    if (vou === "enter") {
+                        vou = 13;
+
+                    } else {
+                        vou = vou.charCodeAt(0);
+                    }
+                    keyUp({
+                        which: vou
+                    })
+                }
+            });
+            el.addEventListener("mouseup", (e) => {
+                var vou = e.target.getAttribute("key");
+                if (vou) {
+                    if (vou === "enter") {
+                        vou = 13;
+
+                    } else {
+                        vou = vou.charCodeAt(0);
+                    }
+                    keyUp({
+                        which: vou
+                    })
+                }
+            });
         });
+
         function keyUp(keyEvent) {
             // shiftHeld = keyEvent.shiftKey;
             // commandHeld = keyEvent.ctrlKey && (!(k === "["));
@@ -571,7 +585,7 @@ el.addEventListener("touchstart",(e)=> {
             metaHeld = !(k === "[") && metaHeld;
             commandHeld = !(k === "") && commandHeld;
             shiftHeld = !(k === "") && shiftHeld;
-            
+
             console.log(k, keyEvent.which);
             if (keyEvent.which === 20) {
                 capsLock = !capsLock;
@@ -580,7 +594,7 @@ el.addEventListener("touchstart",(e)=> {
                 el) => el.classList.remove("pressed"));
             updateKeyboard();
         }
-        window.addEventListener("keyup",keyUp)
+        window.addEventListener("keyup", keyUp)
         // window.addEventListener("keypress", function(keyEvent) {
         //     shiftHeld=keyEvent.shiftKey;
         //     commandHeld=keyEvent.ctrlKey;
@@ -594,6 +608,10 @@ el.addEventListener("touchstart",(e)=> {
         //     if(el)el.classList.remove("pressed");
         //     updateKeyboard();
         // })
+        window.setInterval(function(){
+            keyboardEl.style.transform=`scale(${window.innerWidth/(1376+ 16)})`;
+            keyboardEl.style.transformOrigin=`top left`;
+        },1000/60)
     </script>
 </body>
 
