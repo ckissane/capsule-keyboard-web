@@ -26,7 +26,7 @@
             <div class="keyboard">
                 <div class="keyboard-main">
                     <div class="key-row">
-                        <div class="key key-special" key="">
+                        <div class="key key-special" key="" style="width:128px;">
                             <div class="main-text">ESC</div>
                         </div>
                         <div class="key key-special" key="p">
@@ -52,6 +52,21 @@
                         </div>
                         <div class="key key-special">
                             <div class="main-text">F8</div>
+                        </div>
+                        <div class="key key-special">
+                            <div class="main-text">F9</div>
+                        </div>
+                        <div class="key key-special">
+                            <div class="main-text">F10</div>
+                        </div>
+                        <div class="key key-special">
+                            <div class="main-text">F11</div>
+                        </div>
+                        <div class="key key-special">
+                            <div class="main-text">F12</div>
+                        </div>
+                        <div class="key key-special">
+                            <div class="main-text">F13</div>
                         </div>
                     </div>
                     <div class="key-row">
@@ -345,7 +360,7 @@
         }
         
         #input-thing {
-            width: 100%;
+            width: calc( 100% - 16px );
             flex: 1 0;
         }
         
@@ -387,6 +402,19 @@
             width: 80px;
             border-radius: 12px;
             position: relative;
+            font-size: 24px;
+            line-height: 32px;
+        }
+        #input-thing {
+            
+            backdrop-filter: blur(15px);
+            background: rgba(0, 0, 0, 0.25);
+            padding: 8px;
+            margin:8px;
+           box-sizing: border-box;
+            
+            border-radius: 12px;
+            
             font-size: 24px;
             line-height: 32px;
         }
@@ -798,6 +826,10 @@ document.onkeypress.punctuation = [33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,
             if (keyEvent.which === 20) {
                 capsLock = !capsLock;
             }
+            if((commandHeld||metaHeld) && k.toLowerCase()==="a"){
+                selection={index:0,length:editor.getLength()};
+                console.log("wow");
+            }
             // if(keyEvent.getModifierState){
             //     capsLock=keyEvent.getModifierState("CapsLock");
             // }
@@ -1052,9 +1084,14 @@ selection={index:Math.max(s.index,0),length:0};
             //     updateKeyboard();
             // })
         window.setInterval(function() {
-            keyboardEl.style.transform = `scale(${window.innerWidth/(1376+ 16)})`;
+            var sc=window.innerWidth / (1376 + 16) ;
+            if(sc>1){
+sc=1;
+            }
+            keyboardEl.style.transform = `scale(${sc})`;
+            keyboardEl.style.marginLeft=(window.innerWidth-(1376 + 16)*sc)/2+"px";
             keyboardEl.style.transformOrigin = `top left`;
-            document.querySelector(".keyboard-con").style.height = (window.innerWidth / (1376 + 16) * 96 * 6) + "px";
+            document.querySelector(".keyboard-con").style.height = (sc * 96 * 6) + "px";
 var c=editor.getSelection();
 if(c){
 selection=c;
@@ -1069,6 +1106,7 @@ editor.blur();
                 // }
             }
         });
+        editor.setText("edit me!")
     </script>
 </body>
 
