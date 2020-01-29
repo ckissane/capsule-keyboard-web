@@ -748,7 +748,7 @@
         var commandHeld = false;
         var metaHeld = false;
         var capsLock = false;
-
+       var selection={index:0,length:0};
         function updateKeyboard() {
             if (shiftHeld || capsLock) {
                 keyboardEl.classList.add("shift-held");
@@ -770,7 +770,22 @@
             }
         }
 
+       
+document.onkeypress = function (e)
+{
+    e = e || window.event;
+    if (e.charCode === 0 || e.ctrlKey || document.onkeypress.punctuation.indexOf(e.charCode) >= 0)
+        return;
+    var s = String.fromCharCode(e.charCode); // or e.keyCode for compatibility, but then have to handle MORE non-character keys
+    var s2 = e.shiftKey ? s.toUpperCase() : s.toLowerCase();
+    var capsLockOn = (s2 !== s);
+    if(s.toUpperCase() !== s.toLowerCase()){
+    capsLock=capsLockOn;
+    }
+}
+document.onkeypress.punctuation = [33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,91,92,93,94,95,96,123,124,125,126];
         function keyDown(keyEvent, special) {
+            console.log(keyEvent)
             // shiftHeld = keyEvent.shiftKey;
             // commandHeld = keyEvent.ctrlKey;
 
@@ -780,6 +795,12 @@
             metaHeld = (k === "[") || metaHeld;
             commandHeld = (k === "") || commandHeld;
             shiftHeld = (k === "") || shiftHeld;
+            if (keyEvent.which === 20) {
+                capsLock = !capsLock;
+            }
+            // if(keyEvent.getModifierState){
+            //     capsLock=keyEvent.getModifierState("CapsLock");
+            // }
 
             console.log(k, keyEvent.which);
             document.querySelectorAll(`.key[key="${k.replace(String.fromCharCode(13),"enter")}"]`).forEach((
@@ -897,7 +918,7 @@
                     ee.key = ")";
                 }
                 console.log(ee);
-                var s = editor.getSelection();
+                var s = {index:selection.index+0,length:selection.length+0};//editor.getSelection();
                 if (!s) {
                     s = {
                         index: 0,
@@ -905,19 +926,20 @@
                     }
                 }
                 if (ee.key.length === 1) {
-                    editor.insertText(s, ee.key, "user");
-                    editor.setSelection({
+                    editor.insertText(s, ee.key, "api");
+                    selection=({
                         index: s.index + 1,
                         length: 0
                     });
                 } else if (ee.key.toLowerCase() == "back_space") {
-                    if (s.length == 0) {
+                    if (s.length == 0 && s.index>0) {
                         s = {
                             index: s.index - 1,
                             length: 1
                         }
                     }
-                    editor.deleteText(s, "user");
+                    editor.deleteText(s, "api");
+selection={index:Math.max(s.index,0),length:0};
                     // editor.setSelection({
                     //     index: s.index + 1,
                     //     length: 0
@@ -942,20 +964,20 @@
                     }, true)
                 }
             });
-            el.addEventListener("mousedown", (e) => {
-                var vou = e.target.getAttribute("key");
-                if (vou) {
-                    if (vou === "enter") {
-                        vou = 13;
+            // el.addEventListener("mousedown", (e) => {
+            //     var vou = e.target.getAttribute("key");
+            //     if (vou) {
+            //         if (vou === "enter") {
+            //             vou = 13;
 
-                    } else {
-                        vou = vou.charCodeAt(0);
-                    }
-                    keyDown({
-                        which: vou
-                    }, true)
-                }
-            });
+            //         } else {
+            //             vou = vou.charCodeAt(0);
+            //         }
+            //         keyDown({
+            //             which: vou
+            //         }, true)
+            //     }
+            // });
 
 
             el.addEventListener("touchend", (e) => {
@@ -972,20 +994,20 @@
                     })
                 }
             });
-            el.addEventListener("mouseup", (e) => {
-                var vou = e.target.getAttribute("key");
-                if (vou) {
-                    if (vou === "enter") {
-                        vou = 13;
+            // el.addEventListener("mouseup", (e) => {
+            //     var vou = e.target.getAttribute("key");
+            //     if (vou) {
+            //         if (vou === "enter") {
+            //             vou = 13;
 
-                    } else {
-                        vou = vou.charCodeAt(0);
-                    }
-                    keyUp({
-                        which: vou
-                    })
-                }
-            });
+            //         } else {
+            //             vou = vou.charCodeAt(0);
+            //         }
+            //         keyUp({
+            //             which: vou
+            //         })
+            //     }
+            // });
         });
 
         function keyUp(keyEvent) {
@@ -997,9 +1019,14 @@
             shiftHeld = !(k === "") && shiftHeld;
 
             console.log(k, keyEvent.which);
-            if (keyEvent.which === 20) {
-                capsLock = !capsLock;
-            }
+            
+            // if (keyEvent.which === 20) {
+            //     capsLock = !capsLock;
+            // }
+            // if(keyEvent.getModifierState){
+            //     capsLock=keyEvent.getModifierState("CapsLock");
+            // }
+
             document.querySelectorAll(`.key[key="${k.replace(String.fromCharCode(13),"enter")}"]`).forEach((
                 el) => el.classList.remove("pressed"));
             updateKeyboard();
@@ -1022,7 +1049,11 @@
             keyboardEl.style.transform = `scale(${window.innerWidth/(1376+ 16)})`;
             keyboardEl.style.transformOrigin = `top left`;
             document.querySelector(".keyboard-con").style.height = (window.innerWidth / (1376 + 16) * 96 * 6) + "px";
-            editor.focus();
+var c=editor.getSelection();
+if(c){
+selection=c;
+}
+editor.blur();
         }, 1000 / 60)
         var container = document.getElementById('input-thing');
         var editor = new Quill(container, {
