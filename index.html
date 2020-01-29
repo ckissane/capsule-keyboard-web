@@ -397,7 +397,7 @@
             /* padding-left: 10px;
             padding-right: 10px; */
             display: inline-block;
-            transition: box-shadow 0.25s;
+            transition: background 0.5s;
             vertical-align: top;
             width: 80px;
             border-radius: 12px;
@@ -422,6 +422,8 @@
         .key.pressed {
             backdrop-filter: blur(15px);
             background: rgba(255, 255, 255, 0.25);
+            transition: background 0.1s;
+
         }
         
         .key.key-special {
@@ -434,7 +436,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            transition: all 0.2s;
+            transition: all 0.1s;
         }
         
         .key .shift-text {
@@ -444,7 +446,7 @@
             transform: translate(-50%, -50%);
             font-size: 18px;
             line-height: 24px;
-            transition: all 0.2s;
+            transition: all 0.1s;
         }
         
         .key .command-text {
@@ -454,7 +456,7 @@
             transform: translate(-50%, -50%);
             font-size: 18px;
             line-height: 24px;
-            transition: all 0.2s;
+            transition: all 0.1s;
         }
         
         .keyboard.shift-held .key .shift-text {
@@ -464,7 +466,7 @@
             transform: translate(-50%, -50%);
             font-size: 24px;
             line-height: 32px;
-            transition: all 0.2s;
+            transition: all 0.1s;
         }
         
         .keyboard.shift-held .key .lower-text {
@@ -474,7 +476,7 @@
             transform: translate(-50%, -50%);
             font-size: 18px;
             line-height: 24px;
-            transition: all 0.2s;
+            transition: all 0.1s;
         }
         
         .keyboard.command-held .key .command-text {
@@ -484,7 +486,7 @@
             transform: translate(-50%, -50%);
             font-size: 24px;
             line-height: 32px;
-            transition: all 0.2s;
+            transition: all 0.1s;
         }
         
         .keyboard.command-held .key .shift-text {
@@ -494,7 +496,7 @@
             transform: translate(-50%, -50%);
             font-size: 18px;
             line-height: 24px;
-            transition: all 0.2s;
+            transition: all 0.1s;
         }
         
         .keyboard.command-held .key .lower-text {
@@ -504,7 +506,7 @@
             transform: translate(-50%, -50%);
             font-size: 18px;
             line-height: 24px;
-            transition: all 0.2s;
+            transition: all 0.1s;
         }
         
         .key * {
