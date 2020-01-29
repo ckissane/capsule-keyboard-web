@@ -956,6 +956,9 @@ selection={index:Math.max(s.index,0),length:0};
                     if (vou === "enter") {
                         vou = 13;
 
+                    }else if (vou === "caps-lock") {
+                        vou = 20;
+
                     } else {
                         vou = vou.charCodeAt(0);
                     }
