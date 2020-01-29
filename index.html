@@ -806,14 +806,14 @@ document.onkeypress.punctuation = [33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,
             document.querySelectorAll(`.key[key="${k.replace(String.fromCharCode(13),"enter")}"]`).forEach((
                 el) => el.classList.add("pressed"));
 
-            if (special) {
+            if (special||true) {
                 var txt = s;
                 var ee = {
                     which: keyEvent.which,
                     shiftKey: shiftHeld,
                     metaKey: metaHeld,
                     ctrlKey: commandHeld,
-                    key: shiftHeld ? keyboardMap[keyEvent.which] : keyboardMap[keyEvent.which].toLowerCase()
+                    key: shiftHeld ? keyboardMap[keyEvent.which].toUpperCase() : keyboardMap[keyEvent.which].toLowerCase()
                 };
                 if (ee.key == "close_bracket") {
                     ee.key = "]";
@@ -926,6 +926,9 @@ document.onkeypress.punctuation = [33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,
                     }
                 }
                 if (ee.key.length === 1) {
+                    if(capsLock){
+                        ee.key=ee.key.toLowerCase()===ee.key?ee.key.toUpperCase():ee.key.toLowerCase();
+                    }
                     editor.insertText(s, ee.key, "api");
                     selection=({
                         index: s.index + 1,
